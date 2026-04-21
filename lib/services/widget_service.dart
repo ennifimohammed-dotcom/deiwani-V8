@@ -1,8 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Widget service — writes 6 keys to SharedPreferences
-/// and triggers native Android widget refresh.
+/// Writes widget data to SharedPreferences and triggers native Android refresh.
 /// Compatible with Flutter 3.22.0 — no external packages.
 class WidgetService {
   static const _ch = MethodChannel('com.debttracker.app/widgets');
@@ -14,25 +13,54 @@ class WidgetService {
     required String overdue,
     required String currency,
     required bool positive,
+    String currencyCode = 'MAD',
+    String lastActivity = '',
+    int lastActivityTs = 0,
+    String totalSettled = '0',
   }) async {
     try {
       final p = await SharedPreferences.getInstance();
+
+      // Legacy keys — kept for BalanceWidget backward compatibility
       await p.setString('flutter.w_balance',  balance);
       await p.setString('flutter.w_lent',     lent);
       await p.setString('flutter.w_borrowed', borrowed);
       await p.setString('flutter.w_overdue',  overdue);
       await p.setString('flutter.w_currency', currency);
       await p.setBool  ('flutter.w_positive', positive);
+
+      // New keys for DeiwaniWidget1 and DeiwaniWidget2
+      await p.setString('flutter.widget_net_balance',     balance);
+      await p.setString('flutter.widget_total_lent',      lent);
+      await p.setString('flutter.widget_total_borrowed',  borrowed);
+      await p.setString('flutter.widget_overdue_count',   overdue);
+      await p.setString('flutter.widget_total_settled',   totalSettled);
+      await p.setBool  ('flutter.widget_net_positive',    positive);
+      await p.setString('flutter.widget_currency_symbol', currency);
+      await p.setString('flutter.widget_currency_code',   currencyCode);
+      if (lastActivity.isNotEmpty && lastActivityTs > 0) {
+        await p.setString('flutter.widget_last_activity',    lastActivity);
+        await p.setInt   ('flutter.widget_last_activity_ts', lastActivityTs);
+      }
+
       await _ch.invokeMethod('refresh');
     } catch (_) {}
   }
 
-  /// Kept for backwards compat with HomeScreen.
-  /// Returns empty — widget tap just opens the app.
-  static Future<String> getPendingRoute() async => '';
-
-  /// Kept for backwards compat with screens that call recordActivity
-  static Future<void> recordActivity(String description) async {
-    // no-op — not used by the simplified widget
+  /// Returns the pending navigation route set by a widget tap, then clears it.
+  static Future<String> getPendingRoute() async {
+    try {
+      final p = await SharedPreferences.getInstance();
+      final route = p.getString('flutter.widget_pending_route') ?? '';
+      if (route.isNotEmpty) {
+        await p.remove('flutter.widget_pending_route');
+      }
+      return route;
+    } catch (_) {
+      return '';
+    }
   }
+
+  /// Kept for backwards compatibility with screens that call recordActivity.
+  static Future<void> recordActivity(String description) async {}
 }
