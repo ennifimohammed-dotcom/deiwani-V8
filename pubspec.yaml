@@ -1,0 +1,44 @@
+name: debt_tracker
+description: Deiwani - ديوني v5
+publish_to: 'none'
+version: 5.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  provider: ^6.1.1
+  sqflite: ^2.3.0
+  path: ^1.9.0
+  path_provider: ^2.1.2
+  shared_preferences: ^2.2.2
+  fl_chart: ^0.68.0
+  excel: ^4.0.2
+  intl: ^0.19.0
+  share_plus: ^9.0.0
+  url_launcher: ^6.2.5
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+  fonts:
+    - family: Tajawal
+      fonts:
+        - asset: assets/fonts/Tajawal-Regular.ttf
+        - asset: assets/fonts/Tajawal-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Tajawal-ExtraBold.ttf
+          weight: 800
+  assets:
+    - assets/fonts/
+    - assets/images/

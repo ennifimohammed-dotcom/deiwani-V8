@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#3B4A7A"
+    android:padding="14dp"
+    android:layoutDirection="rtl">
+
+    <!-- ════════════ Balance Section ════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:background="@drawable/widget_card"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical">
+
+        <!-- Positive badge -->
+        <TextView
+            android:id="@+id/w_badge_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="موجب ↑"
+            android:textColor="#00C896"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:background="@drawable/widget_badge_green"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+
+        <!-- Negative badge (hidden by default) -->
+        <TextView
+            android:id="@+id/w_badge_neg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="سالب ↓"
+            android:textColor="#FF4757"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:background="@drawable/widget_badge_red"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:visibility="gone"/>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <!-- Balance label + amount -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الرصيد الصافي"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_gravity="end"/>
+
+            <TextView
+                android:id="@+id/w_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="د.م 0.00"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_gravity="end"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ════════════ Cards Row ════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Lent card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/widget_card"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="↑ أقرضت"
+                android:textColor="#00C896"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/w_lent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="د.م 0"
+                android:textColor="#00C896"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"/>
+        </LinearLayout>
+
+        <!-- Borrowed card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/widget_card"
+            android:padding="10dp"
+            android:layout_marginStart="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="↓ اقترضت"
+                android:textColor="#FF4757"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/w_borrowed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="د.م 0"
+                android:textColor="#FF4757"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"/>
+        </LinearLayout>
+
+        <!-- Overdue card -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/widget_card"
+            android:padding="10dp"
+            android:layout_marginStart="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚠ متأخرة"
+                android:textColor="#FF4757"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/w_overdue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FF4757"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
