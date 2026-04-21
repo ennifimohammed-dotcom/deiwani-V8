@@ -42,7 +42,7 @@
             android:textColor="#FF4757"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:background="@drawable/widget_badge_red"
+            android:background="android:background="#FF4757""
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:paddingTop="6dp"
