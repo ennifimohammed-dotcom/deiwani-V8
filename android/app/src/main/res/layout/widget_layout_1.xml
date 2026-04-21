@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget1_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_bg"
+    android:padding="8dp">
+
+    <!-- Row 1: Net Balance + Total Lent -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/card1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/widget_card"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/card1_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الرصيد"
+                android:textColor="#90A8C8"
+                android:textSize="9sp"/>
+
+            <TextView
+                android:id="@+id/card1_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#00C896"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/widget_card_green"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/card2_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اقرضت"
+                android:textColor="#90A8C8"
+                android:textSize="9sp"/>
+
+            <TextView
+                android:id="@+id/card2_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#00C896"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Row 2: Total Borrowed + Overdue -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/card3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/widget_card_red"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/card3_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اقترضت"
+                android:textColor="#90A8C8"
+                android:textSize="9sp"/>
+
+            <TextView
+                android:id="@+id/card3_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FF4757"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/widget_card_orange"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/card4_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="متاخرة"
+                android:textColor="#90A8C8"
+                android:textSize="9sp"/>
+
+            <TextView
+                android:id="@+id/card4_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#FF9F43"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

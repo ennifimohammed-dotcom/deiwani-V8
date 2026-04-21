@@ -8,6 +8,9 @@ class DebtProvider extends ChangeNotifier {
   List<Debt> _all     = [];
   String _search      = '';
   String _curSymbol   = 'DH';
+  String _curCode     = 'MAD';
+  String _lastActivity   = '';
+  int    _lastActivityTs = 0;
 
   // ── Getters ──
   List<Debt> get active   => _sorted().where((d) => !d.isSettled).toList();
@@ -37,9 +40,6 @@ class DebtProvider extends ChangeNotifier {
     return list;
   }
 
-  // Store currency info for widget
-  String _curCode = 'MAD';
-  
   void syncPrefs({
     required String curSymbol,
     required String curCode,
@@ -58,6 +58,8 @@ class DebtProvider extends ChangeNotifier {
   }
 
   Future<void> addDebt(Debt debt) async {
+    _lastActivity   = 'دين جديد: ${debt.name}';
+    _lastActivityTs = DateTime.now().millisecondsSinceEpoch;
     await DatabaseService().insertDebt(debt);
     await load();
   }
@@ -73,6 +75,8 @@ class DebtProvider extends ChangeNotifier {
   }
 
   Future<void> settleDebt(Debt debt) async {
+    _lastActivity   = 'تسوية: ${debt.name}';
+    _lastActivityTs = DateTime.now().millisecondsSinceEpoch;
     final remaining = debt.remainingAmount;
     if (remaining > 0) {
       await DatabaseService()
@@ -84,11 +88,15 @@ class DebtProvider extends ChangeNotifier {
 
   Future<void> addPayment(
       int debtId, double amount, DateTime date, String? note) async {
-    await DatabaseService().addPayment(debtId, amount, date, note);
+    // Capture debt name from in-memory list before any async call
     final d = _all.firstWhere(
       (x) => x.id == debtId,
       orElse: () => throw Exception('Debt $debtId not found'),
     );
+    _lastActivity   = 'دفعة: ${d.name} • ${_fmt(amount, dec: 0)} $_curSymbol';
+    _lastActivityTs = DateTime.now().millisecondsSinceEpoch;
+
+    await DatabaseService().addPayment(debtId, amount, date, note);
     if (d.paidAmount + amount >= d.amount) {
       await DatabaseService().updateDebt(d.copyWith(isSettled: true));
     }
@@ -105,17 +113,20 @@ class DebtProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Push data to widgets (6 keys only) ──
+  // ── Push data to Android widgets ──
   void _pushWidgets() {
-    // Use CurrencyFormatter.symbol() for proper Arabic display (د.م instead of DH)
     final displaySymbol = CurrencyFormatter.symbol(_curCode);
     WidgetService.update(
-      balance:  _fmt(netBalance),
-      lent:     _fmt(totalLent,     dec: 0),
-      borrowed: _fmt(totalBorrowed, dec: 0),
-      overdue:  '$overdueCount',
-      currency: displaySymbol,
-      positive: netBalance >= 0,
+      balance:        _fmt(netBalance),
+      lent:           _fmt(totalLent,     dec: 0),
+      borrowed:       _fmt(totalBorrowed, dec: 0),
+      overdue:        '$overdueCount',
+      currency:       displaySymbol,
+      positive:       netBalance >= 0,
+      currencyCode:   _curCode,
+      lastActivity:   _lastActivity,
+      lastActivityTs: _lastActivityTs,
+      totalSettled:   '$settledCount',
     );
   }
 
