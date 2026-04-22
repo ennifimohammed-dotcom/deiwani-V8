@@ -38,43 +38,16 @@
             </intent-filter>
         </activity>
 
-        <!-- Balance Widget (existing) -->
-        <receiver
-            android:name=".BalanceWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.debttracker.app.REFRESH"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_balance_info"/>
-        </receiver>
-
         <!-- Deiwani Widget 1: Financial Overview (2x2 grid) -->
         <receiver
             android:name=".DeiwaniWidget1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.debttracker.app.REFRESH"/>
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_1"/>
-        </receiver>
-
-        <!-- Deiwani Widget 2: Quick Overview & Actions -->
-        <receiver
-            android:name=".DeiwaniWidget2"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.debttracker.app.REFRESH"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info_2"/>
         </receiver>
 
         <meta-data

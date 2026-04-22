@@ -94,34 +94,6 @@ class SettingsScreen extends StatelessWidget {
               )),
               const SizedBox(height: 18),
 
-              // ── NUMBER FORMAT (#7) ──
-              _sectionTitle(lang == 'ar' ? 'تنسيق الأرقام'
-                  : lang == 'fr' ? 'Format des nombres' : 'Number Format'),
-              _settingsCard(child: Column(children: [
-                ListTile(
-                  onTap: () => auth.setArabicNumerals(false),
-                  leading: _radio(!auth.useArabicNumerals, auth.themeColor),
-                  title: Text('0 1 2 3 4 5 6 7 8 9',
-                      style: TextStyle(fontFamily: 'Tajawal', fontWeight: FontWeight.w600,
-                          color: !auth.useArabicNumerals ? auth.themeColor : labelColor)),
-                  subtitle: Text(lang == 'ar' ? 'أرقام لاتينية' : lang == 'fr' ? 'Chiffres latins' : 'Latin numerals',
-                      style: const TextStyle(fontFamily: 'Tajawal', fontSize: 12,
-                          color: AppTheme.textSecondary)),
-                ),
-                _divider(),
-                ListTile(
-                  onTap: () => auth.setArabicNumerals(true),
-                  leading: _radio(auth.useArabicNumerals, auth.themeColor),
-                  title: Text('٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩',
-                      style: TextStyle(fontFamily: 'Tajawal', fontWeight: FontWeight.w600,
-                          color: auth.useArabicNumerals ? auth.themeColor : labelColor)),
-                  subtitle: Text(lang == 'ar' ? 'أرقام عربية' : lang == 'fr' ? 'Chiffres arabes' : 'Arabic numerals',
-                      style: const TextStyle(fontFamily: 'Tajawal', fontSize: 12,
-                          color: AppTheme.textSecondary)),
-                ),
-              ])),
-              const SizedBox(height: 18),
-
               // ── THEME (#10) ──
               _sectionTitle(lang == 'ar' ? 'المظهر' : lang == 'fr' ? 'Thème' : 'Theme'),
               _settingsCard(child: Column(children: [
