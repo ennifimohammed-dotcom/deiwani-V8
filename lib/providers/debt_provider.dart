@@ -47,8 +47,12 @@ class DebtProvider extends ChangeNotifier {
     required bool   isDark,
     required bool   arabicNums,
   }) {
+    final changed = _curCode != curCode || _curSymbol != curSymbol;
     _curSymbol = curSymbol;
     _curCode   = curCode;
+    // Re-push widget data whenever currency settings change so the symbol
+    // in the widget updates immediately without waiting for the next load().
+    if (changed && _all.isNotEmpty) _pushWidgets();
   }
 
   Future<void> load() async {
