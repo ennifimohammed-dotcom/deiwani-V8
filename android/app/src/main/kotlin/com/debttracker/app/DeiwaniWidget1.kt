@@ -3,7 +3,6 @@ package com.debttracker.app
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
@@ -20,14 +19,8 @@ class DeiwaniWidget1 : AppWidgetProvider() {
         }
     }
 
-    override fun onReceive(ctx: Context, intent: Intent) {
-        super.onReceive(ctx, intent)
-        if (intent.action == "com.debttracker.app.REFRESH") {
-            val mgr = AppWidgetManager.getInstance(ctx)
-            val ids = mgr.getAppWidgetIds(ComponentName(ctx, DeiwaniWidget1::class.java))
-            if (ids.isNotEmpty()) onUpdate(ctx, mgr, ids)
-        }
-    }
+    // onReceive not overridden — parent AppWidgetProvider handles ACTION_APPWIDGET_UPDATE
+    // and routes to onUpdate() automatically.
 
     private fun openIntent(ctx: Context, screen: String, reqCode: Int): PendingIntent {
         val i = Intent(ctx, MainActivity::class.java).apply {
@@ -57,7 +50,6 @@ class DeiwaniWidget1 : AppWidgetProvider() {
         views.setTextViewText(R.id.card3_value, fmt(borrowed,cur, curCode))
         views.setTextViewText(R.id.card4_value, overdue)
 
-        // Color balance card green when positive, red when negative
         val balColor = if (positive) 0xFF00C896.toInt() else 0xFFFF4757.toInt()
         views.setTextColor(R.id.card1_value, balColor)
 

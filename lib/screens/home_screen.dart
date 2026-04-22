@@ -235,8 +235,8 @@ class _HomeScreenState extends State<HomeScreen>
                   const SizedBox(width: 8),
                   Expanded(child: StatMiniCard(
                     label: tl('overdue'),
-                    value: CurrencyFormatter.formatNumber(dp.overdueCount.toDouble(), 0,
-                        useArabicNumerals: arabicNum).replaceAll('.00', '').replaceAll('.٠٠', ''),
+                    value: CurrencyFormatter.formatNumber(dp.overdueCount.toDouble(), 0)
+                        .replaceAll('.00', ''),
                     icon: Icons.warning_amber_rounded,
                     color: dp.overdueCount > 0 ? AppTheme.red : Colors.white54)),
                 ]),

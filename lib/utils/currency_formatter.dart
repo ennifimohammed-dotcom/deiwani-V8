@@ -1,7 +1,7 @@
-/// ديوني CurrencyFormatter v2
+/// ديوني CurrencyFormatter v3
 /// - USD ($) and EUR (€): symbol on RIGHT
 /// - All others: symbol on LEFT
-/// - Arabic numerals option
+/// - Always Latin numerals (0-9) — Arabic numeral option removed
 class CurrencyFormatter {
   static const Map<String, String> _symbols = {
     'MAD': 'د.م', 'DZD': 'د.ج', 'TND': 'د.ت',
@@ -14,14 +14,19 @@ class CurrencyFormatter {
 
   static String format(
     double amount, String currencyCode, String lang, {
-    int decimals = 2, bool useArabicNumerals = false,
+    int decimals = 2,
+    // useArabicNumerals kept for API compatibility — always ignored
+    bool useArabicNumerals = false,
   }) {
     final sym = symbol(currencyCode);
-    final num = formatNumber(amount, decimals, useArabicNumerals: useArabicNumerals);
+    final num = formatNumber(amount, decimals);
     return isRightSymbol(currencyCode) ? '$num $sym' : '$sym $num';
   }
 
-  static String formatNumber(double value, int decimals, {bool useArabicNumerals = false}) {
+  static String formatNumber(double value, int decimals, {
+    // useArabicNumerals kept for API compatibility — always ignored
+    bool useArabicNumerals = false,
+  }) {
     final abs = value.abs();
     final negative = value < 0 ? '-' : '';
     final raw = abs.toStringAsFixed(decimals);
@@ -33,15 +38,6 @@ class CurrencyFormatter {
       if (i > 0 && (intPart.length - i) % 3 == 0) buf.write(',');
       buf.write(intPart[i]);
     }
-    final result = '$negative$buf.$decPart';
-    return useArabicNumerals ? _toArabic(result) : result;
-  }
-
-  static String _toArabic(String s) {
-    const l = ['0','1','2','3','4','5','6','7','8','9'];
-    const a = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-    var r = s;
-    for (var i = 0; i < l.length; i++) r = r.replaceAll(l[i], a[i]);
-    return r;
+    return '$negative$buf.$decPart';
   }
 }
