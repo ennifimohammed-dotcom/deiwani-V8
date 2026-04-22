@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="الرصيد"
                 android:textColor="#90A8C8"
-                android:textSize="10sp"
+                android:textSize="13sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="اقرضت"
                 android:textColor="#90A8C8"
-                android:textSize="10sp"
+                android:textSize="13sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="اقترضت"
                 android:textColor="#90A8C8"
-                android:textSize="10sp"
+                android:textSize="13sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:text="متاخرة"
                 android:textColor="#90A8C8"
-                android:textSize="10sp"
+                android:textSize="13sp"
                 android:textStyle="bold"/>
 
             <TextView
